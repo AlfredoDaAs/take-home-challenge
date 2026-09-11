@@ -1,6 +1,6 @@
-export class User {
+export class UserResponseDto {
     id: string;
-    username: string;
+    username: string
     email: string;
     password: string;
 }
