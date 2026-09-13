@@ -9,7 +9,7 @@ import { UserResponseDto } from './dto/user-response.dto.js';
 export class UsersService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  async create(createUserDto: CreateUserDto): Promise<UserResponseDto> {
     const createUser = {
       ...createUserDto
     } as User;
@@ -19,11 +19,11 @@ export class UsersService {
     return user;
   }
 
-  async findAll(): Promise<User[]> {
+  async findAll(): Promise<UserResponseDto[]> {
     return this.userRepository.findAll();
   }
 
-  async findOne(id: string): Promise<User | undefined> {
+  async findOne(id: string): Promise<UserResponseDto | undefined> {
     const user = await this.userRepository.findOne(id);
 
     if (!user) {
@@ -32,9 +32,10 @@ export class UsersService {
     return user;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto): Promise<User | undefined> {
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<UserResponseDto | undefined> {
     const user = await this.userRepository.findOne(id);
 
+    console.log('user', id, user)
     if (!user) {
       throw new NotFoundException(`User with ID ${id} not found`);
     }
