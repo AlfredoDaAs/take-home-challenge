@@ -3,7 +3,7 @@ import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
 import { User } from './entities/user.entity.js';
-import { ApiBody, ApiResponse, ApiOkResponse, ApiTags, ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
+import { ApiBody, ApiResponse, ApiOkResponse, ApiTags, ApiCreatedResponse, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { UserResponseDto } from './dto/user-response.dto.js';
 
 @ApiTags('Users')
@@ -28,6 +28,7 @@ export class UsersController {
 
   @ApiOperation({ summary: 'Retrieve a user by ID' })
   @ApiOkResponse({ description: 'The user with the specified ID', type: UserResponseDto })
+  @ApiParam({ name: 'id', description: 'The ID of the user', type: String, example: 'aeb10d4c-44b4-4025-a430-823a0e7959c2' })
   @Get(':id')
   findOne(@Param('id') id: string): Promise<UserResponseDto | undefined> {
     return this.usersService.findOne(id);
@@ -36,6 +37,7 @@ export class UsersController {
   @ApiOperation({ summary: 'Update a user by ID' })
   @ApiOkResponse({ description: 'The user with the specified ID has been successfully updated.', type: UserResponseDto })
   @ApiBody({ type: UpdateUserDto })
+  @ApiParam({ name: 'id', description: 'The ID of the user', type: String, example: 'aeb10d4c-44b4-4025-a430-823a0e7959c2' })
   @Put(':id')
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto): Promise<UserResponseDto | undefined> {
     return this.usersService.update(id, updateUserDto);
