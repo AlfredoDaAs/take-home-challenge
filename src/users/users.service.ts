@@ -15,7 +15,7 @@ export class UsersService {
     } as User;
   
     const user = await this.userRepository.create(createUser);
-  
+
     return user;
   }
 

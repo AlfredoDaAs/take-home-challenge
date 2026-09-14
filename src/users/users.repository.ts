@@ -1,43 +1,48 @@
 import { Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity.js';
-import { v4 as uuidv4} from 'uuid';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm/browser/repository/Repository.js';
 
 @Injectable()
 export class UserRepository {
-    private users: User[] = [];
+    constructor (
+        @InjectRepository(User)
+        private userRepository: Repository<User>,
+    ) {}
     
     async create(user: User): Promise<User> {
-        user.id = uuidv4(); // Generate a unique ID for the user
+        const newUser = this.userRepository.create(user);
 
-        this.users.push(user);
-        return user;
+        return this.userRepository.save(newUser);
     }
 
     async findAll(): Promise<User[]> {
-        return this.users;
+        return this.userRepository.find();
     }
 
-    async findOne(id: string): Promise<User | undefined> {
-        return this.users.find(user => user.id === id);
+    async findOne(id: string): Promise<User | null> {
+        return this.userRepository.findOneBy({ id });
     }
 
     async update(id: string, updatedUser: Partial<User>): Promise<User | undefined> {
-        const userIndex = this.users.findIndex(user => user.id === id);
+        const user = await this.userRepository.findOneBy({ id });
 
-        if (userIndex !== -1) {
-            this.users[userIndex] = { ...this.users[userIndex], ...updatedUser };
-            return this.users[userIndex];
+        if (user) {
+            Object.assign(user, updatedUser);
+            return this.userRepository.save(user);
         }
 
         return undefined;
     }
 
     async remove(id: string): Promise<boolean> {
-        const userIndex = this.users.findIndex(user => user.id === id);
-        if (userIndex !== -1) {
-            this.users.splice(userIndex, 1);
+        const user = await this.userRepository.findOneBy({ id });
+
+        if (user) {
+            await this.userRepository.remove(user);
             return true;
         }
+
         return false;
     }
 }
