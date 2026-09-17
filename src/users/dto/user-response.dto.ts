@@ -9,4 +9,7 @@ export class UserResponseDto {
 
     @ApiProperty({ description: 'The email of the user', type: String, example: 'alfredo@example.com' })
     email: string;
+
+    @ApiProperty({ description: 'The IDs of the Pokémon associated with the user', type: [Number], example: [1, 2, 3] })
+    pokemonIds: number[];
 }

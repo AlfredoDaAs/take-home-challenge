@@ -2,12 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/browser/repository/Repository.js';
+import { PokemonClient } from '../clients /pokemon.client.js';
+import { UserWithPokemonDto } from './dto/user-with-pokemon.dto.js';
 
 @Injectable()
 export class UserRepository {
     constructor (
         @InjectRepository(User)
         private userRepository: Repository<User>,
+        private readonly pokemonClient: PokemonClient,
     ) {}
     
     async create(user: User): Promise<User> {
@@ -20,8 +23,14 @@ export class UserRepository {
         return this.userRepository.find();
     }
 
-    async findOne(id: string): Promise<User | null> {
-        return this.userRepository.findOneBy({ id });
+    async findOne(id: string): Promise<UserWithPokemonDto | null> {
+        const user = await this.userRepository.findOneBy({ id });
+        const pomekons = await this.pokemonClient.getPokemonDetailsByIds(user?.pokemonIds || []);
+
+        return {
+            ...user,
+            pokemon: pomekons
+        } as UserWithPokemonDto;
     }
 
     async update(id: string, updatedUser: Partial<User>): Promise<User | undefined> {

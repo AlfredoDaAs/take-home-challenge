@@ -21,4 +21,11 @@ export class CreateUserDto {
         example: 'password123'
     })
     password: string;
+
+    @ApiProperty({
+        description: 'The IDs of the Pokémon associated with the user',
+        type: [Number],
+        example: [1, 2, 3]
+    })
+    pokemonIds: number[];
 }

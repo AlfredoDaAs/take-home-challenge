@@ -1,14 +1,25 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateUserDto } from './create-user.dto.js';
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsArray, IsEmail, IsNumber, IsString } from 'class-validator';
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {
-    @ApiPropertyOptional({ description: 'The username of the user', type: String, example: 'Alfredo' })
-    username?: string;
+export class UpdateUserDto {
+    @ApiProperty({ description: 'The username of the user', type: String, example: 'Alfredo' })
+    @IsString()
+    username: string;
 
-    @ApiPropertyOptional({ description: 'The email of the user', type: String, example: 'alfredo@example.com' })
-    email?: string;
+    @ApiProperty({ description: 'The email of the user', type: String, example: 'alfredo@example.com' })
+    @IsString()
+    @IsEmail()
+    email: string;
 
-    @ApiPropertyOptional({ description: 'The password of the user', type: String, example: 'password123' })
-    password?: string;
+    @ApiProperty({ description: 'The password of the user', type: String, example: 'password123' })
+    @IsString()
+    password: string;
+
+    @ApiProperty({
+        description: 'The IDs of the Pokémon associated with the user',
+        type: [Number],
+        example: [1, 2, 3]
+    })
+    @IsArray()
+    pokemonIds: number[];
 }
