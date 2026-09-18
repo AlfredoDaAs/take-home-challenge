@@ -5,11 +5,12 @@ import { UsersModule } from './users/users.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
+const envFile =  `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`;
+
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: envFile }),
     TypeOrmModule.forRootAsync({
-      imports: [ConfigModule.forRoot({ isGlobal: true })],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
@@ -19,8 +20,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         autoLoadEntities: true,
-        entities: [import.meta.dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: configService.get('NODE_ENV') === 'development', // Set to false in production
+        synchronize: configService.get('NODE_ENV') === 'test' || configService.get('NODE_ENV') === 'development', // Set to false in production
       })
     }),
     UsersModule
