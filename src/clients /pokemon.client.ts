@@ -21,21 +21,6 @@ export class PokemonClient {
         this.baseUrl = this.configService.get<string>('POKEMON_API_URL', 'https://pokeapi.co/api/v2');
     }
 
-    async getPokemonByName(name: string): Promise<PokemonDetails> {
-        try {
-            const url = `${this.baseUrl}/pokemon/${name}`;
-
-            const response: AxiosResponse<IPokemon> = await firstValueFrom(this.httpService.get(url));
-
-            return {
-                id: response.data.id,
-                name: response.data.name
-            }
-        } catch (error) {
-            throw new Error('Failed to fetch Pokémon details');
-        }
-    }
-
     async getPokemonById(id : number): Promise<PokemonDetails> {
         try {
             const url = `${this.baseUrl}/pokemon/${id}`;
