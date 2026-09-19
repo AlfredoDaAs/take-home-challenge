@@ -2,8 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, Put, ParseUUIDPipe } from '
 import { UsersService } from './users.service.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { UpdateUserDto } from './dto/update-user.dto.js';
-import { User } from './entities/user.entity.js';
-import { ApiBody, ApiResponse, ApiOkResponse, ApiTags, ApiCreatedResponse, ApiOperation, ApiParam } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiTags, ApiCreatedResponse, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { UserResponseDto } from './dto/user-response.dto.js';
 import { UserWithPokemonDto } from './dto/user-with-pokemon.dto.js';
 
@@ -31,7 +30,7 @@ export class UsersController {
   @ApiOkResponse({ description: 'The user with the specified ID', type: UserWithPokemonDto })
   @ApiParam({ name: 'id', description: 'The ID of the user', type: String, example: 'aeb10d4c-44b4-4025-a430-823a0e7959c2' })
   @Get(':id')
-  findOne(@Param('id', ParseUUIDPipe) id: string): Promise<UserWithPokemonDto | undefined> {
+  findOne(@Param('id', ParseUUIDPipe) id: string): Promise<UserWithPokemonDto> {
     return this.usersService.findOne(id);
   }
 

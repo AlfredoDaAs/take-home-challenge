@@ -24,7 +24,7 @@ export class UsersService {
     return this.userRepository.findAll();
   }
 
-  async findOne(id: string): Promise<UserWithPokemonDto | null> {
+  async findOne(id: string): Promise<UserWithPokemonDto> {
     return this.userRepository.findOne(id);
   }
 

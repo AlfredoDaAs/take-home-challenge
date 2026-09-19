@@ -23,7 +23,7 @@ export class UserRepository {
         return this.userRepository.find();
     }
 
-    async findOne(id: string): Promise<UserWithPokemonDto | null> {
+    async findOne(id: string): Promise<UserWithPokemonDto> {
         const user = await this.userRepository.findOneBy({ id });
 
         if (!user) {
