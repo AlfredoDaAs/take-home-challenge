@@ -8,7 +8,6 @@ export default defineConfig({
   test: {
     globals: true,
     root: './',
-    include: ['**/*.spec.ts'],
-    setupFiles: ['vitest.setup.ts']
+    include: ['**/*.spec.ts']
   },
 });

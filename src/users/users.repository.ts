@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/browser/repository/Repository.js';
@@ -7,12 +7,12 @@ import { UserWithPokemonDto } from './dto/user-with-pokemon.dto.js';
 
 @Injectable()
 export class UserRepository {
-    constructor (
+    constructor(
         @InjectRepository(User)
         private userRepository: Repository<User>,
         private readonly pokemonClient: PokemonClient,
-    ) {}
-    
+    ) { }
+
     async create(user: User): Promise<User> {
         const newUser = this.userRepository.create(user);
 
@@ -25,6 +25,11 @@ export class UserRepository {
 
     async findOne(id: string): Promise<UserWithPokemonDto | null> {
         const user = await this.userRepository.findOneBy({ id });
+
+        if (!user) {
+            throw new NotFoundException(`User with ID ${id} not found`);
+        }
+
         const pomekons = await this.pokemonClient.getPokemonDetailsByIds(user?.pokemonIds || []);
 
         return {

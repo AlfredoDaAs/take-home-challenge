@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsEmail, IsNumber, IsString } from 'class-validator';
+import { IsArray, IsEmail, IsInt, IsNumber, IsString } from 'class-validator';
 
 export class UpdateUserDto {
     @ApiProperty({ description: 'The username of the user', type: String, example: 'Alfredo' })
@@ -7,7 +7,6 @@ export class UpdateUserDto {
     username: string;
 
     @ApiProperty({ description: 'The email of the user', type: String, example: 'alfredo@example.com' })
-    @IsString()
     @IsEmail()
     email: string;
 
@@ -21,5 +20,6 @@ export class UpdateUserDto {
         example: [1, 2, 3]
     })
     @IsArray()
+    @IsInt({ each: true })
     pokemonIds: number[];
 }

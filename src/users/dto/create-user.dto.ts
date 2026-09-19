@@ -1,4 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsArray, IsEmail, IsInt, IsString } from "class-validator";
 
 export class CreateUserDto {
     @ApiProperty({
@@ -6,6 +7,7 @@ export class CreateUserDto {
         type: String,
         example: 'Alfredo'
     })
+    @IsString()
     username: string;
 
     @ApiProperty({
@@ -13,6 +15,7 @@ export class CreateUserDto {
         type: String,
         example: 'alfredo@example.com'
     })
+    @IsEmail()
     email: string;
 
     @ApiProperty({
@@ -20,6 +23,7 @@ export class CreateUserDto {
         type: String,
         example: 'password123'
     })
+    @IsString()
     password: string;
 
     @ApiProperty({
@@ -27,5 +31,7 @@ export class CreateUserDto {
         type: [Number],
         example: [1, 2, 3]
     })
+    @IsArray()
+    @IsInt({ each: true })
     pokemonIds: number[];
 }
