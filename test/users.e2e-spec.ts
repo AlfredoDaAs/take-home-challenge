@@ -29,6 +29,7 @@ describe('UserController (e2e)', () => {
             .get('/users');
 
         expect(response.status).toBe(200);
+        expect(response.body).toStrictEqual([]);
         expect(response.body).toHaveLength(0);
     });
 

@@ -5,15 +5,15 @@ import { User } from '../../src/users/entities/user.entity.js';
 export const pokemonList = [
     {
         id: 1,
-        name: 'bulbasaur'
+        name: 'bulbasaur-test'
     },
     {
         id: 2,
-        name: 'ivysaur'
+        name: 'ivysaur-test'
     },
     {
         id: 3,
-        name: 'venusaur'
+        name: 'venusaur-test'
     }
 ];
 
@@ -48,24 +48,14 @@ export const users = [
 ] as User[];
 
 export const restHandlers = [
-    http.get('https://pokeapi.co/api/v2/pokemon/1', () => {
-        return HttpResponse.json({
-            id: 1,
-            name: 'bulbasaur-test'
-        })
-    }),
-    http.get('https://pokeapi.co/api/v2/pokemon/2', () => {
-        return HttpResponse.json({
-            id: 2,
-            name: 'ivysaur-test'
-        })
-    }),
-    http.get('https://pokeapi.co/api/v2/pokemon/3', () => {
-        return HttpResponse.json({
-            id: 3,
-            name: 'venusaur-test'
-        })
-    })
+    ...pokemonList.map(
+        (pokemon) => http.get(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`,
+            () => HttpResponse.json({
+                id: pokemon.id,
+                name: pokemon.name
+            })
+        )
+    ),
 ];
 
 export const server = setupServer(...restHandlers);
