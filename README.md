@@ -6,6 +6,8 @@ Users API with a CRUD endpoints
 
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/AlfredoDaAs/take-home-challenge/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/AlfredoDaAs/take-home-challenge/tree/main)
 
+[![Coverage Status](https://coveralls.io/repos/github/AlfredoDaAs/take-home-challenge/badge.svg?branch=main)](https://coveralls.io/github/AlfredoDaAs/take-home-challenge?branch=main)
+
 ## Features
 
 - Create new users with their Pokemon IDs
