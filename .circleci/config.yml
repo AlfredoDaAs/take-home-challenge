@@ -9,7 +9,6 @@ jobs:
     executor: node/default # use the default executor defined within the orb
     docker:
       - image: cimg/node:24.14.1
-  
       - image: cimg/postgres:18.0
         environment:
           POSTGRES_USER: postgres
@@ -29,6 +28,10 @@ jobs:
             POKEMON_API_URL: https://pokeapi.co/api/v2
           command: npm run test:e2e
           name: Run tests
+      - run:
+          command: npm run test:cov
+          name: Run Test Coverage
+      - coveralls/upload
       - run:
           command: npm run build
           name: Build app
