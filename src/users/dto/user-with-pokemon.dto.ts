@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { PokemonDetails } from "../../clients /pokemon.client.js";
+import { PokemonDetails } from "../../clients/pokemon.client.js";
 
 export class UserWithPokemonDto {
     @ApiProperty({

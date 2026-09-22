@@ -2,7 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from './entities/user.entity.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm/browser/repository/Repository.js';
-import { PokemonClient } from '../clients /pokemon.client.js';
+import { PokemonClient } from '../clients/pokemon.client.js';
 import { UserWithPokemonDto } from './dto/user-with-pokemon.dto.js';
 
 @Injectable()

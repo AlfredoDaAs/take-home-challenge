@@ -4,7 +4,7 @@ import { UsersController } from './users.controller.js';
 import { UserRepository } from './users.repository.js';
 import { User } from './entities/user.entity.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ClientsModule } from '../clients /clients.module.js';
+import { ClientsModule } from '../clients/clients.module.js';
 
 @Module({
   controllers: [UsersController],

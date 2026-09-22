@@ -5,14 +5,29 @@ import { UsersService } from './users.service.js';
 describe('UsersController', () => {
   let controller: UsersController;
 
+  const userServiceMock = {
+    create: vi.fn(),
+    findAll: vi.fn(),
+    findOne: vi.fn(),
+    update: vi.fn(),
+    remove: vi.fn()
+  }
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [UsersService],
+      providers: [{
+        provide: UsersService,
+        useValue: userServiceMock
+      }],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
   });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  })
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
