@@ -17,7 +17,7 @@
     "lint": "oxlint src/ test/",
     "test": "NODE_ENV=test vitest run",
     "test:watch": "NODE_ENV=test vitest",
-    "test:cov": "NODE_ENV=test vitest run --coverage",
+    "test:cov": "NODE_ENV=test vitest run --coverage --config ./vitest.config.e2e.ts",
     "test:debug": "NODE_ENV=test vitest --inspect-brk --no-file-parallelism",
     "test:e2e": "NODE_ENV=test vitest run --config ./vitest.config.e2e.ts"
   },
