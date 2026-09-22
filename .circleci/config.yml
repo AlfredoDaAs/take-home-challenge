@@ -7,6 +7,8 @@ jobs:
   build_and_test: # this can be any name you choose
     executor: node/default # use the default executor defined within the orb
     docker:
+      - image: cimg/node:24.14.1
+  
       - image: cimg/postgres:18.0
         environment:
           POSTGRES_USER: postgres
