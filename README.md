@@ -2,6 +2,10 @@
 
 Users API with a CRUD endpoints
 
+## Badges
+
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/AlfredoDaAs/take-home-challenge/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/AlfredoDaAs/take-home-challenge/tree/main)
+
 ## Features
 
 - Create new users with their Pokemon IDs
