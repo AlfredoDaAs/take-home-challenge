@@ -1,6 +1,6 @@
 # Take Home Challenge
 
-Users API with a CRUD endpoints
+Users API with a CRUD endpoints, the users also handle a field for adding pokemons and when getting a single user you will see the name of the Pokemon Ids that were added when creating/updating the user. More information is added in the Swagger Documentation and also all the requests for this challenge.
 
 ## Badges
 
