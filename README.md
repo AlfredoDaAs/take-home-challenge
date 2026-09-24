@@ -67,7 +67,7 @@ TBD
 
 ## Routes
 
-- [Local Swagger](https://localhost:300/api)
+- [Local Swagger](http://localhost:3000/api)
 
 ## Env vars should be defined
 
