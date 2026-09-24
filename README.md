@@ -7,6 +7,10 @@ Users API with a CRUD endpoints
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/AlfredoDaAs/take-home-challenge/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/AlfredoDaAs/take-home-challenge/tree/main)
 [![Coverage Status](https://coveralls.io/repos/github/AlfredoDaAs/take-home-challenge/badge.svg?branch=main)](https://coveralls.io/github/AlfredoDaAs/take-home-challenge?branch=main)
 
+## Deployed App Running on Heroku
+
+- [Swagger](https://hacker-it-thc-939c5dba1c0f.herokuapp.com/api#/)
+
 ## Features
 
 - Create new users with their Pokemon IDs
@@ -63,7 +67,7 @@ TBD
 
 ## Routes
 
-- : [API Swagger](https://localhost:300/api)
+- [Local Swagger](https://localhost:300/api)
 
 ## Env vars should be defined
 
