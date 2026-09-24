@@ -5,7 +5,7 @@ import { UsersModule } from './users/users.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 
-const envFile =  `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`;
+const envFile = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`;
 
 @Module({
   imports: [
@@ -22,6 +22,8 @@ const envFile =  `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`
         autoLoadEntities: true,
         synchronize: configService.get('DATABASE_SYNC') === 'true',
         ssl: configService.get('DB_SSL') === 'true'
+          ? { rejectUnauthorized: false }
+          : false,
       })
     }),
     UsersModule
