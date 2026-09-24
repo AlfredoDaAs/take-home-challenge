@@ -21,6 +21,7 @@ const envFile =  `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`
         database: configService.get('DB_NAME'),
         autoLoadEntities: true,
         synchronize: configService.get('DATABASE_SYNC') === 'true',
+        ssl: configService.get('DB_SSL', false)
       })
     }),
     UsersModule
