@@ -20,7 +20,7 @@ const envFile =  `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
         autoLoadEntities: true,
-        synchronize: configService.get('NODE_ENV') === 'test' || configService.get('NODE_ENV') === 'development', // Set to false in production
+        synchronize: configService.get('DATABASE_SYNC') === 'true',
       })
     }),
     UsersModule
