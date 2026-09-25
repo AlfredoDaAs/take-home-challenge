@@ -26,7 +26,7 @@ jobs:
             DB_HOST: localhost
             DB_PORT: 5432
             POKEMON_API_URL: https://pokeapi.co/api/v2
-          command: npm run test:cov
+          command: npm run test:cov -- --maxWorkers=1
           name: Run tests
       - coveralls/upload
       - run:
