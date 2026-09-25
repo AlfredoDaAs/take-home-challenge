@@ -22,7 +22,10 @@ export const dataSourceOptions: DataSourceOptions = {
         ? { rejectUnauthorized: false }
         : false,
     migrations: process.env.LOAD_MIGRATIONS === 'true'
-        ? [join(import.meta.dirname, '..', 'migrations', '**', '*{.js,.ts}')]
+        ? [
+            join(import.meta.dirname, '..', 'migrations', '**', '*{.js,.ts}'),
+            join(import.meta.dirname, '..', 'seed-migrations', '**', '*{.js,.ts}')
+        ]
         : [],
 };
 
