@@ -17,7 +17,6 @@ services:
       - DB_HOST=postgres
       - DB_PORT=5432
       - POKEMON_API_URL=https://pokeapi.co/api/v2
-      - DATABASE_SYNC=true
 
   test:
     build:
@@ -30,7 +29,6 @@ services:
       - DB_HOST=postgres
       - DB_PORT=5432
       - POKEMON_API_URL=https://pokeapi.co/api/v2
-      - DATABASE_SYNC=true
     depends_on:
       - postgres
     command: npm run test:e2e

@@ -3,7 +3,8 @@ import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
+import { AppDataSource } from './data-source.js'
 
 const envFile = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`;
 
@@ -11,20 +12,16 @@ const envFile = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`;
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: envFile }),
     TypeOrmModule.forRootAsync({
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DB_HOST'),
-        port: parseInt(configService.get('DB_PORT', '5432'), 10),
-        username: configService.get('DB_USERNAME'),
-        password: configService.get('DB_PASSWORD'),
-        database: configService.get('DB_NAME'),
-        autoLoadEntities: true,
-        synchronize: configService.get('DATABASE_SYNC') === 'true',
-        ssl: configService.get('DB_SSL') === 'true'
-          ? { rejectUnauthorized: false }
-          : false,
-      })
+      useFactory: async () => {
+        if (!AppDataSource.isInitialized) {
+          await AppDataSource.initialize();
+        }
+
+        return {
+          ...AppDataSource.options,
+          autoLoadEntities: true,
+        }
+      }
     }),
     UsersModule
   ],

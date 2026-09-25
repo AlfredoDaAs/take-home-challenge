@@ -19,7 +19,12 @@
     "test:watch": "NODE_ENV=test vitest",
     "test:cov": "NODE_ENV=test vitest run --coverage --config ./vitest.config.e2e.ts",
     "test:debug": "NODE_ENV=test vitest --inspect-brk --no-file-parallelism",
-    "test:e2e": "NODE_ENV=test vitest run --config ./vitest.config.e2e.ts"
+    "test:e2e": "NODE_ENV=test vitest run --config ./vitest.config.e2e.ts",
+    "typeorm": "typeorm-ts-node-esm -d ./src/data-source.ts",
+    "migration:create": "typeorm migration:create",
+    "migration:generate": "LOAD_MIGRATIONS=true npm run typeorm -- migration:generate",
+    "migration:run": "LOAD_MIGRATIONS=true npm run typeorm -- migration:run",
+    "migration:revert": "LOAD_MIGRATIONS=true npm run typeorm -- migration:revert"
   },
   "dependencies": {
     "@nestjs/axios": "^12.0.1",
@@ -52,6 +57,7 @@
     "prettier": "^3.4.2",
     "source-map-support": "^0.5.21",
     "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
     "typescript": "^6.0.2",
     "uuid": "^14.0.2",
     "vite-tsconfig-paths": "^5.1.4",
