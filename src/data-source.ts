@@ -9,7 +9,7 @@ dotenv.config({
     path: getEnvVarFile(process.env.NODE_ENV)
 });
 
-const dataSource: DataSourceOptions = {
+export const dataSourceOptions: DataSourceOptions = {
     type: 'postgres',
     host: process.env.DB_HOST,
     port: parseInt(process.env.DB_PORT || '5432', 10),
@@ -26,4 +26,4 @@ const dataSource: DataSourceOptions = {
         : [],
 };
 
-export const AppDataSource = new DataSource(dataSource);
+export const AppDataSource = new DataSource(dataSourceOptions);

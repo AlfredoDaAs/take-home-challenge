@@ -4,7 +4,7 @@ import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { AppDataSource } from './data-source.js'
+import { dataSourceOptions } from './data-source.js'
 
 const envFile = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`;
 
@@ -12,16 +12,10 @@ const envFile = `.env${process.env.NODE_ENV ? '.' + process.env.NODE_ENV : ''}`;
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: envFile }),
     TypeOrmModule.forRootAsync({
-      useFactory: async () => {
-        if (!AppDataSource.isInitialized) {
-          await AppDataSource.initialize();
-        }
-
-        return {
-          ...AppDataSource.options,
-          autoLoadEntities: true,
-        }
-      }
+      useFactory: async () => ({
+        ...dataSourceOptions,
+        autoLoadEntities: true,
+      })
     }),
     UsersModule
   ],
